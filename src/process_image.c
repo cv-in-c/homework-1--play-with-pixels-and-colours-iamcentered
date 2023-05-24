@@ -75,27 +75,32 @@ void shift_image(image im, int c, float v)
         }
 }
 
-void clamp_image(image im)
-{
+void clamp_image(image im){
     // TODO Fill this in
-        
+        for (int i = 0; i < im.c; i++){
+            for (int j = 0; j < im.h; j++){
+            for (int k = 0; k < im.w; k++){
+                float v = get_pixel(im, k, j, i);
+                float new_value = (v < 0) ? 0 : (v > 1 ? 1 : v);
+                set_pixel(im, k, j, i, new_value);
+            }
+            }
+        }
 }
-// These might be handy
-float three_way_max(float a, float b, float c)
-{
-    return (a > b) ? ( (a > c) ? a : c) : ( (b > c) ? b : c) ;
-}
+            // These might be handy
+float three_way_max(float a, float b, float c){
+                return (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+            }
 
-float three_way_min(float a, float b, float c)
-{
-    return (a < b) ? ( (a < c) ? a : c) : ( (b < c) ? b : c) ;
-}
+float three_way_min(float a, float b, float c){
+                return (a < b) ? ((a < c) ? a : c) : ((b < c) ? b : c);
+            }
 
 void rgb_to_hsv(image im)
 {
     // TODO Fill this in
+    
 }
-
 void hsv_to_rgb(image im)
 {
     // TODO Fill this in

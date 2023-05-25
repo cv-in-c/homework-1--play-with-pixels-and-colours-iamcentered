@@ -123,15 +123,15 @@ float three_way_min(float a, float b, float c){
 void rgb_to_hsv(image im){
     // TODO Fill this in
     image hsv = make_image(im.w, im.h, im.c);
-    for (int i; i < im.h; i++){
-        for (int j; j < im.w;j++){
+    for (int i=0; i < im.h; i++){
+        for (int j=0; j < im.w;j++){
             float r = get_pixel(im, j, i, 0);
             float g = get_pixel(im, j, i, 1);
             float b = get_pixel(im, j, i, 2);
             float V = three_way_max(r, g, b);
             float m = three_way_min(r, g, b);
             float C = V - m;
-            float S,H;
+            float S,H,Hdash;
             if(V==0){
                 S = 0;
             }
@@ -139,7 +139,6 @@ void rgb_to_hsv(image im){
                 S = C / V;
             }
             if(C!=0){
-                float Hdash;
                 if(V==r)
                     Hdash = (g - b) / C;
                 else if(V==g)

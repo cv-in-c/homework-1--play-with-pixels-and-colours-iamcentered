@@ -166,7 +166,7 @@ void hsv_to_rgb(image im){
             float h = get_pixel(im, j, i, 0);
             float s = get_pixel(im, j, i, 1);
             float v = get_pixel(im, j, i, 2);
-            float r, g, b,Hdash,;
+            float r, g, b,Hdash;
             if(v==0){
                 r = g = b = 0;
             }

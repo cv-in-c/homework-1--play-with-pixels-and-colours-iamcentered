@@ -122,7 +122,7 @@ float three_way_min(float a, float b, float c){
 
 void rgb_to_hsv(image im){
     // TODO Fill this in
-    image rgb_to_hsv = make_image(im.w, im.h, im.c);
+    image hsv = make_image(im.w, im.h, im.c);
     for (int i; i < im.h; i++){
         for (int j; j < im.w;j++){
             float r = get_pixel(im, j, i, 0);
@@ -151,12 +151,12 @@ void rgb_to_hsv(image im){
             else{
                 H = 0;
             } 
-            set_pixel(rgb_to_hsv, j, i, 0, H);
-            set_pixel(rgb_to_hsv, j, i, 1, S);
-            set_pixel(rgb_to_hsv, j, i, 2, V);
+            set_pixel(hsv, j, i, 0, H);
+            set_pixel(hsv, j, i, 1, S);
+            set_pixel(hsv, j, i, 2, V);
          }
     }
-    return rgb_to_hsv;
+    return hsv;
 }
 void hsv_to_rgb(image im){
     // TODO Fill this in

@@ -122,7 +122,6 @@ float three_way_min(float a, float b, float c){
 
 void rgb_to_hsv(image im){
     // TODO Fill this in
-    image hsv = make_image(im.w, im.h, im.c);
     for (int i=0; i < im.h; i++){
         for (int j=0; j < im.w;j++){
             float r = get_pixel(im, j, i, 0);
@@ -147,19 +146,17 @@ void rgb_to_hsv(image im){
                     Hdash = (r - g) / C + 4;
                 H = (Hdash < 0) ? (Hdash / 6 + 1) : (Hdash / 6);
             }
-            else{
+            else if(C==0){
                 H = 0;
             } 
-            set_pixel(hsv, j, i, 0, H);
-            set_pixel(hsv, j, i, 1, S);
-            set_pixel(hsv, j, i, 2, V);
+            set_pixel(im, j, i, 0, H);
+            set_pixel(im, j, i, 1, S);
+            set_pixel(im, j, i, 2, V);
          }
     }
-    return hsv;
 }
 void hsv_to_rgb(image im){
     // TODO Fill this in
-    image rgb = make_image(im.w, im.h, im.c);
     for (int i = 0; i < im.h;i++){
          for (int j = 0; j < im.w;j++){
             float h = get_pixel(im, j, i, 0);
@@ -206,10 +203,9 @@ void hsv_to_rgb(image im){
                     b = (6 - Hdash) * C + v - C;
                 }
             }
-            set_pixel(rgb, j, i, 0, r);
-            set_pixel(rgb, j, i, 1, g);
-            set_pixel(rgb, j, i, 2, b);
+            set_pixel(im, j, i, 0, r);
+            set_pixel(im, j, i, 1, g);
+            set_pixel(im, j, i, 2, b);
          }
     }
-    return rgb;
 }

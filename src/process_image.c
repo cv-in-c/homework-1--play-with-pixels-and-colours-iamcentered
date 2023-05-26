@@ -79,7 +79,7 @@ image rgb_to_grayscale(image im)
 
             float value = (0.299 * (float)rdash + 0.587 * (float)gdash + 0.114 * (float)bdash);
 
-            value = (value < 0.0) ? 0.0 : ((value > 1.0) ? 1.0 : value);
+            value = (value < 0) ? 0 : ((value > 1) ? 1 : value);
             set_pixel(gray, j, i, 0, value);
         }
     }
@@ -165,7 +165,7 @@ void hsv_to_rgb(image im){
             float h = get_pixel(im, j, i, 0);
             float s = get_pixel(im, j, i, 1);
             float v = get_pixel(im, j, i, 2);
-            float r, g, b,Hdash;
+            float r, g, b,Hdash,C;
             if(v==0){
                 r = g = b = 0;
             }
@@ -174,8 +174,42 @@ void hsv_to_rgb(image im){
             }
             else{
                 Hdash = h * 6;
-
+                C = s * v;
+                if (Hdash < 1){
+                    r = v;
+                    g = Hdash * C + v - C;
+                    b = v - C;
+                }
+                else if (Hdash < 2){
+                    r = (2 - Hdash) * C + v - C;
+                    g = v;
+                    b = v - C;
+                }
+                else if (Hdash < 3){
+                    r = v - C;
+                    g = v;
+                    b = (Hdash - 2) * C + v - C;
+                }
+                else if (Hdash < 4){
+                    r = v - C;
+                    g = (4 - Hdash) * C + v - C;
+                    b = v;
+                }
+                else if (Hdash < 5){
+                    r = (Hdash - 4) * C + v - C;
+                    g = v - C;
+                    b = v;
+                }
+                else{
+                    r = v;
+                    g = v - C;
+                    b = (6 - Hdash) * C + v - C;
+                }
             }
+            set_pixel(rgb, j, i, 0, r);
+            set_pixel(rgb, j, i, 1, g);
+            set_pixel(rgb, j, i, 2, b);
          }
     }
+    return rgb;
 }

@@ -189,11 +189,22 @@ void hsv_to_rgb(image im) {
                 r = v;
                 g = v - C;
                 b = (6-Hdash)*C + v - C;
-        }
+            }
 
-        set_pixel(im, j, i, 0, r);
-        set_pixel(im, j, i, 1, g);
-        set_pixel(im, j, i, 2, b);
+            set_pixel(im, j, i, 0, r);
+            set_pixel(im, j, i, 1, g);
+            set_pixel(im, j, i, 2, b);
+        }
     }
 }
+void scale_image(image im, int c, float v)
+{
+    // TODO Fill this in
+        for (int i = 0; i < im.h;i++){
+            for (int j = 0; j < im.w;j++){
+            float value = get_pixel(im, j, i, c);
+            float scale = value * v;
+            set_pixel(im, j, i, c, scale);
+            }
+        }
 }
